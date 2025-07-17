@@ -5,6 +5,11 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import tseslint from 'typescript-eslint'
 import { globalIgnores } from 'eslint/config'
 
+// Patch for Node 16
+if (typeof global.structuredClone !== 'function') {
+  global.structuredClone = (obj) => JSON.parse(JSON.stringify(obj))
+}
+
 export default tseslint.config([
   globalIgnores(['dist']),
   {
