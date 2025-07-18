@@ -52,11 +52,14 @@
     "docker:setup": "docker compose build",
     "docker:install": "docker compose run --rm dev npm install",
     "setup": "./scripts/setup.sh",
+    "fix-deps": "./scripts/fix-deps.sh",
+    "sync-deps": "./scripts/sync-deps.sh",
     "clean": "./scripts/clean.sh",
     "clean:full": "./scripts/clean.sh -f",
     "clean:build": "./scripts/clean.sh -b",
     "clean:docker": "./scripts/clean.sh -d",
-    "clean:node": "./scripts/clean.sh -n"
+    "clean:node": "./scripts/clean.sh -n",
+    "postinstall": "node -e \"if(process.platform==='darwin'){console.log('Installing dmg-license for macOS...');require('child_process').execSync('npm install dmg-license@^1.0.11 --no-save',{stdio:'inherit'})}\""
   },
   "dependencies": {
     "react": "^19.1.0",

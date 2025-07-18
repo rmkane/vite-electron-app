@@ -1,5 +1,5 @@
-# Use Node 16 for development and building
-FROM node:16-alpine
+# Use Node 18 for development and building (supports package-lock v2)
+FROM node:18-alpine
 
 # Set working directory
 WORKDIR /app
