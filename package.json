@@ -25,6 +25,11 @@
       "target": "AppImage",
       "icon": "assets/icon.png",
       "category": "Utility"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "assets/icon.icns",
+      "category": "public.app-category.utilities"
     }
   },
   "scripts": {
@@ -34,7 +39,11 @@
     "preview": "vite preview",
     "electron": "echo Launching Electron... && electron .",
     "start": "./scripts/start-dev.sh",
-    "dist": "npm run build && electron-builder"
+    "dist": "npm run build && electron-builder",
+    "build-icons": "./scripts/build-icons.sh",
+    "build-icons:mac": "./scripts/build-icons.sh -p mac",
+    "build-icons:windows": "./scripts/build-icons.sh -p windows",
+    "build-icons:linux": "./scripts/build-icons.sh -p linux"
   },
   "dependencies": {
     "react": "^19.1.0",
