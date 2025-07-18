@@ -1,0 +1,69 @@
+services:
+  # Development service
+  dev:
+    build: .
+    container_name: vite-electron-dev
+    ports:
+      - "5173:5173"  # Vite dev server
+    volumes:
+      - .:/app
+      - /app/node_modules  # Preserve node_modules in container
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true  # Better file watching in Docker
+      - VITE_HOST=0.0.0.0  # Ensure Vite binds to all interfaces
+    command: npm run dev
+    stdin_open: true
+    tty: true
+
+  # Build service
+  build:
+    build: .
+    container_name: vite-electron-build
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=production
+    command: npm run build
+    profiles:
+      - build
+
+  # Distribute service (builds distributable packages)
+  dist:
+    build: .
+    container_name: vite-electron-dist
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=production
+    command: npm run dist
+    profiles:
+      - dist
+
+  # Icon building service
+  icons:
+    build: .
+    container_name: vite-electron-icons
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npm run build-icons
+    profiles:
+      - icons
+
+  # Shell access for development
+  shell:
+    build: .
+    container_name: vite-electron-shell
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    command: /bin/sh
+    stdin_open: true
+    tty: true
+    profiles:
+      - shell 

@@ -43,7 +43,20 @@
     "build-icons": "./scripts/build-icons.sh",
     "build-icons:mac": "./scripts/build-icons.sh -p mac",
     "build-icons:windows": "./scripts/build-icons.sh -p windows",
-    "build-icons:linux": "./scripts/build-icons.sh -p linux"
+    "build-icons:linux": "./scripts/build-icons.sh -p linux",
+    "docker:dev": "docker compose up dev",
+    "docker:build": "docker compose --profile build up build",
+    "docker:dist": "docker compose --profile dist up dist",
+    "docker:icons": "docker compose --profile icons up icons",
+    "docker:shell": "docker compose --profile shell up shell",
+    "docker:setup": "docker compose build",
+    "docker:install": "docker compose run --rm dev npm install",
+    "setup": "./scripts/setup.sh",
+    "clean": "./scripts/clean.sh",
+    "clean:full": "./scripts/clean.sh -f",
+    "clean:build": "./scripts/clean.sh -b",
+    "clean:docker": "./scripts/clean.sh -d",
+    "clean:node": "./scripts/clean.sh -n"
   },
   "dependencies": {
     "react": "^19.1.0",
